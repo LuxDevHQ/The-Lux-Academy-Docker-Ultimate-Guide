@@ -81,15 +81,15 @@ docker create -t -i mycont
 docker rename myapp mybestapp 
 ```
 
-Removing a Container
+**Removing a Container**
 
-``bash
+```bash
 docker rm myappv
 ```
 
-Updating a Container
+**Updating a Container**
 
-```
+```bash
 docker update
 ```
 
