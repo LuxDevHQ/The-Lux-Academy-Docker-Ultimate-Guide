@@ -62,92 +62,36 @@ docker pull nginx
 docker push eon01/nginx
 ```
 
-Running Containers
-Creating a Container
-docker create -t -i eon01/infinite --name infinite
-Running a Container
-docker run -it --name infinite -d eon01/infinite
-Renaming a Container
-docker rename infinite infinity
+### **Running Containers**
+
+**Creating a Container**
+
+```bash
+docker create -t -i mycont
+```
+**Running a Container**
+
+```bash
+>>>docker run -p 5000:5000 -t -i myapp  
+```
+
+**Renaming a Container**
+
+```bash
+docker rename myapp mybestapp 
+```
+
 Removing a Container
-docker rm infinite
+
+``bash
+docker rm myappv
+```
+
 Updating a Container
-docker update --cpu-shares 512 -m 300M infinite
-Starting & Stopping Containers
-Starting
-docker start nginx
-Stopping
-docker stop nginx
-Restarting
-docker restart nginx
-Pausing
-docker pause nginx
-Unpausing
-docker unpause nginx
-Blocking a Container
-docker wait nginx
-Sending a SIGKILL
-docker kill nginx
-Connecting to an Existing Container
-docker attach nginx
-Getting Information about Containers
-Running Containers
-docker ps
-docker ps -a
-Container Logs
-docker logs infinite
-Inspecting Containers
-docker inspect infinite
-docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -q)
-Containers Events
-docker events infinite
-Public Ports
-docker port infinite
-Running Processes
-docker top infinite
-Container Resource Usage
-docker stats infinite
-Inspecting Changes to Files or Directories on a Container’s Filesystem
-docker diff infinite
-Manipulating Images
-Listing Images
-docker images
-Building Images
-docker build .
-docker build github.com/creack/docker-firefox
-docker build - < Dockerfile
-docker build - < context.tar.gz
-docker build -t eon/infinite .
-docker build -f myOtherDockerfile .
-curl example.com/remote/Dockerfile | docker build -f - .
-Removing an Image
-docker rmi nginx
-Loading a Tarred Repository from a File or the Standard Input Stream
-docker load < ubuntu.tar.gz
-docker load --input ubuntu.tar
-Save an Image to a Tar Archive
-docker save busybox > ubuntu.tar
-Showing the History of an Image
-docker history
-Creating an Image Fron a Container
-docker commit nginx
-Tagging an Image
-docker tag nginx eon01/nginx
-Pushing an Image
-docker push eon01/nginx
-Networking
-Creating Networks
-docker network create -d overlay MyOverlayNetwork
-docker network create -d bridge MyBridgeNetwork
-docker network create -d overlay \
-  --subnet=192.168.0.0/16 \
-  --subnet=192.170.0.0/16 \
-  --gateway=192.168.0.100 \
-  --gateway=192.170.0.100 \
-  --ip-range=192.168.1.0/24 \
-  --aux-address="my-router=192.168.1.5" --aux-address="my-switch=192.168.1.6" \
-  --aux-address="my-printer=192.170.1.5" --aux-address="my-nas=192.170.1.6" \
-  MyOverlayNetwork
+
+```
+docker update
+```
 
 
 **Writing Your First Dockerfile.** 
@@ -195,7 +139,7 @@ You can then build and run the Docker image:
 This command will create an image tagged myapp from your Dockerfile
 
 ```bash
-docker run -it --name my-running-app myapp 
+docker run -it myapp 
 ```
 
 With this, the container/image is production ready.
