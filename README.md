@@ -34,22 +34,34 @@ https://download.docker.com/win/stable/InstallDocker.msi
 
 **Login to a Registry**
 
-```curl
+```bash
 docker login
 docker login localhost:8080
 ``` 
-Logout from a Registry
+**Logout from a Registry**
+
+```bash
 docker logout
 docker logout localhost:8080
-Searching an Image
+```
+
+**Searching an Image**
+
+```bash
 docker search nginx
-docker search nginx --stars=3 --no-trunc busybox
-Pulling an Image
+```
+**Pulling an Image**
+
+```bash
 docker pull nginx
-docker pull eon01/nginx localhost:5000/myadmin/nginx
-Pushing an Image
+```
+
+**Pushing an Image** 
+
+```bash
 docker push eon01/nginx
-docker push eon01/nginx localhost:5000/myadmin/nginx
+```
+
 Running Containers
 Creating a Container
 docker create -t -i eon01/infinite --name infinite
@@ -136,71 +148,53 @@ docker network create -d overlay \
   --aux-address="my-router=192.168.1.5" --aux-address="my-switch=192.168.1.6" \
   --aux-address="my-printer=192.170.1.5" --aux-address="my-nas=192.170.1.6" \
   MyOverlayNetwork
-Removing a Network
-docker network rm MyOverlayNetwork
-Listing Networks
-docker network ls
-Getting Information About a Network
-docker network inspect MyOverlayNetwork
-Connecting a Running Container to a Network
-docker network connect MyOverlayNetwork nginx
-Connecting a Container to a Network When it Starts
-docker run -it -d --network=MyOverlayNetwork nginx
-Disconnecting a Container from a Network
-docker network disconnect MyOverlayNetwork nginx
-Cleaning Docker
-Removing a Running Container
-docker rm nginx
-Removing a Container and its Volume
-docker rm -v nginx
-Removing all Exited Containers
-docker rm $(docker ps -a -f status=exited -q)
-Removing All Stopped Containers
-docker rm `docker ps -a -q`
-Removing a Docker Image
-docker rmi nginx
-Removing Dangling Images
-docker rmi $(docker images -f dangling=true -q)
-Removing all Images
-docker rmi $(docker images -a -q)
-Stopping & Removing all Containers
-docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
-Removing Dangling Volumes
-docker volume rm $(docker volume ls -f dangling=true -q)
-Docker Swarm
-Installing Docker Swarm
-curl -ssl https://get.docker.com | bash
-Initializing the Swarm
-docker swarm init --advertise-addr 192.168.10.1
-Getting a Worker to Join the Swarm
-docker swarm join-token worker
-Getting a Manager to Join the Swarm
-docker swarm join-token manager
-Listing Services
-docker service ls
-Listing nodes
-docker node ls
-Creating a Service
-docker service create --name vote -p 8080:80 instavote/vote
-Listing Swarm Tasks
-docker service ps
-Scaling a Service
-docker service scale vote=3
-Updating a Service
-docker service update --image instavote/vote:movies vote
-docker service update --force --update-parallelism 1 --update-delay 30s nginx
-docker service update --update-parallelism 5--update-delay 2s --image instavote/vote:indent vote
-docker service update --limit-cpu 2 nginx
-docker service update --replicas=5 nginx
-Connect Deeper
-If you resonated with this article, you can find more interesting content in Painless Docker Course.
-At Eralabs, will be happy to help you with your Docker and Cloud projects, contact us and let’s talk about your projects.
-Subscribe to DevOpsLinks : An Online Community Of Thousands Of IT Experts & DevOps Enthusiast From All Over The World.
-You may be also interested in joining our newsletter Shipped, a newsletter focused on containers, orchestration and serverless technologies.
-You can find me on Twitter, Clarity or my website and you can also check my books: SaltStack For DevOps.
-Don’t forget to join my last project Jobs For DevOps!
 
 
+**Writing Your First Dockerfile.** 
+
+Dockerfile is the text file that will contain the directives on how to build your docker image. Below are some Dockerfile instructions that you should know:
+
+```docker
+FROM — set the base image
+RUN — execute a command in the container
+COPY — supports the basic copying of local files into the container
+ENV — set environment variable
+WORKDIR — set the working directory
+ENTRYPOINT — set the image’s main command, allowing that image to be run as though it was that command
+VOLUME — create mount-point for a volume
+CMD — set executable for container
+```
+For example, let’s see what a Dockerfile for a Flask application could look like:
+
+FROM golang:1.11-alpine
+
+WORKDIR /go/src/app
+COPY . .
+
+RUN go get -d -v ./...
+RUN go install -v ./...
+
+CMD ["app"]
 
 
+Be sure to always indicate a specific version of the base image you would like to use because you never know when the ‘Latest’ image will be changed.
 
+You can then build and run the Docker image:
+
+```
+ docker build -t myapp
+```
+
+This command will create an image tagged myapp from your Dockerfile
+
+```bash
+docker run -it --name my-running-app myapp 
+```
+
+With this, the container/image is production ready.
+
+
+Docker is a strong tool for creating and running applications both locally and in production. Numerous CI/CD tools like Jenkins, TravisCI, CircleCI, etc. are now fully supported and integrated with Docker, which makes your changes from environment to environment very easy. This tutorial has just scratched the basic part of the Docker world. Below are some a few resources to help get you out.
+
+
+Play with Docker, this is an online playground for Docker. It will allow you to practice any of the Docker commands we went over, without having to install anything onto your machine. The best part is it’s free and easy to use.
