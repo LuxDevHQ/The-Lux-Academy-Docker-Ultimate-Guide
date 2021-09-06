@@ -103,24 +103,24 @@ Dockerfile is the text file that will contain the directives on how to build you
 - **RUN** — execute a command in the container
 - **COPY** — supports the basic copying of local files into the container
 - **ENV** — set environment variable
-**WORKDIR** — set the working directory
-**ENTRYPOINT** — set the image’s main command, allowing that image to be run as though it was that command
-**VOLUME** — create mount-point for a volume
-**CMD** — set executable for container
+- **WORKDIR** — set the working directory
+- **ENTRYPOINT** — set the image’s main command, allowing that image to be run as though it was that command
+- **VOLUME** — create mount-point for a volume
+- **CMD** — set executable for container
 
 For example, let’s see what a Dockerfile for a Flask application could look like:
+
 
 ```dockerfile
 FROM python:3.6
 
 COPY . /src
 
-
 COPY ./requirements.txt /src/requirements.txt
 
 WORKDIR src
 
-EXPOSE 5000
+EXPOSE 5000:5000
 
 RUN pip install -r requirements.txt
 
