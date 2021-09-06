@@ -154,18 +154,19 @@ docker network create -d overlay \
 
 Dockerfile is the text file that will contain the directives on how to build your docker image. Below are some Dockerfile instructions that you should know:
 
-```docker
-FROM — set the base image
-RUN — execute a command in the container
-COPY — supports the basic copying of local files into the container
-ENV — set environment variable
-WORKDIR — set the working directory
-ENTRYPOINT — set the image’s main command, allowing that image to be run as though it was that command
-VOLUME — create mount-point for a volume
-CMD — set executable for container
-```
+
+- **FROM** — set the base image
+- **RUN** — execute a command in the container
+- **COPY** — supports the basic copying of local files into the container
+- **ENV** — set environment variable
+**WORKDIR** — set the working directory
+**ENTRYPOINT** — set the image’s main command, allowing that image to be run as though it was that command
+**VOLUME** — create mount-point for a volume
+**CMD** — set executable for container
+
 For example, let’s see what a Dockerfile for a Flask application could look like:
 
+```dockerfile
 FROM golang:1.11-alpine
 
 WORKDIR /go/src/app
@@ -175,7 +176,7 @@ RUN go get -d -v ./...
 RUN go install -v ./...
 
 CMD ["app"]
-
+```
 
 Be sure to always indicate a specific version of the base image you would like to use because you never know when the ‘Latest’ image will be changed.
 
