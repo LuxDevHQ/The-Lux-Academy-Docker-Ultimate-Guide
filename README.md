@@ -13,7 +13,7 @@
 
 **1). Linux**
 
-```curl
+```bash
 curl -sSL https://get.docker.com/ | sh
 ```
 
