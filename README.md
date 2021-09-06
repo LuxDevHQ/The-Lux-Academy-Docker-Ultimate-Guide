@@ -167,15 +167,21 @@ Dockerfile is the text file that will contain the directives on how to build you
 For example, let’s see what a Dockerfile for a Flask application could look like:
 
 ```dockerfile
-FROM golang:1.11-alpine
+FROM python:3.6
 
-WORKDIR /go/src/app
-COPY . .
+COPY . /src
 
-RUN go get -d -v ./...
-RUN go install -v ./...
 
-CMD ["app"]
+COPY ./requirements.txt /src/requirements.txt
+
+WORKDIR src
+
+EXPOSE 5000
+
+RUN pip install -r requirements.txt
+
+
+CMD [ "python", "app.py" ]
 ```
 
 Be sure to always indicate a specific version of the base image you would like to use because you never know when the ‘Latest’ image will be changed.
