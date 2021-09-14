@@ -93,6 +93,36 @@ docker rm myappv
 docker update
 ```
 
+### **Network Commands**
+
+**List networks**
+
+```docker
+docker network ls
+```
+**Remove one or more networks**
+
+```docker
+docker network rm [NETWORK]
+```
+
+**Show information on one or more networks**
+
+```docker
+docker network inspect [NETWORK]
+``` 
+
+**Connects a container to a network**
+
+```docker
+docker network connect [NETWORK] [CONTAINER]
+```
+
+**Disconnect a container from a network**
+
+```docker
+docker network disconnect [NETWORK] [CONTAINER]
+```
 
 **Writing Your First Dockerfile.** 
 
